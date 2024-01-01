@@ -2,31 +2,20 @@ const input = document.getElementById("text-input");
 const button = document.getElementById("check-btn");
 const result = document.getElementById("result");
 
-
-const checkInputExist = () =>{
-  return input.value ? true : alert("Please input a value");
-};
-
-const modifyInput = () => {
-  const regex = /[^A-Z0-9]/ig;
-  return input.value.replace(regex, "").toLowerCase();
+const checkPalindrome = () => {
+if (!input.value) {
+    alert("Please input a value");
+    return;
 }
 
-const isPaLindrome = (input) => {
-  if ((input.length == 1) || (input === input.split("").reverse().join(""))) {
-  return true;
-  }
-  return false;
-}
+const regex = /[^A-Z0-9]/ig;
+const modifiedInput = input.value.replace(regex, "").toLowerCase();
 
-
-const checkPalindrome = (e) => {
-  e.preventDefault();
-  if (checkInputExist()) {
-  const modifiedInput = modifyInput();
-  console.log("modifiedInput:" + modifiedInput);
- result.textContent = isPaLindrome(modifiedInput) ? `${input.value} is a palindrome`: `${input.value} is not a palindrome`;
- };
+result.textContent = modifiedInput === modifiedInput.split("").reverse().join("") ? 
+`${input.value} is a palindrome`:
+`${input.value} is not a palindrome`;
+result.style.display = "block";
+    
 };
 
 button.addEventListener("click",checkPalindrome);
